@@ -1,22 +1,27 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Login from '../pages/Login';
-
 import ProtectedRoute from './ProtectedRoute';
+import ListPage from './ListPage';
 
 function AppRoute() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route
-          path='/dashboard'
-          element={
-            <ProtectedRoute isSignedIn={false}>
-              <Dashboard />
-            </ProtectedRoute>
+        {ListPage().map((el, i) => {
+          if (el.isPrivate) {
+            return (
+              <Route
+                path={el.path}
+                key={i}
+                element={
+                  <ProtectedRoute isSignedIn={false}>
+                    {el.component}
+                  </ProtectedRoute>
+                }
+              />
+            );
           }
-        />
+          return <Route path={el.path} key={i} element={el.component} />;
+        })}
       </Routes>
     </BrowserRouter>
   );
