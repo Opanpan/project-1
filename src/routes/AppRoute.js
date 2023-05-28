@@ -3,6 +3,8 @@ import ProtectedRoute from './ProtectedRoute';
 import ListPage from './ListPage';
 
 function AppRoute() {
+  const user = localStorage.getItem('user');
+
   return (
     <BrowserRouter>
       <Routes>
@@ -13,7 +15,7 @@ function AppRoute() {
                 path={el.path}
                 key={i}
                 element={
-                  <ProtectedRoute isSignedIn={false}>
+                  <ProtectedRoute isSignedIn={user}>
                     {el.component}
                   </ProtectedRoute>
                 }

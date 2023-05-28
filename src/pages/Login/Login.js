@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './login.scss';
 
 function Login() {
+  const navigate = useNavigate();
+
   const [payloadLogin, setPayloadLogin] = useState({
     username: '',
     password: '',
@@ -15,7 +19,16 @@ function Login() {
   };
 
   const handleButtonSignIn = () => {
-    console.log(payloadLogin);
+    axios
+      .post('http://127.0.0.1:8000/api/login', payloadLogin)
+      .then((res) => {
+        const user = res.data[0];
+        if (user !== undefined) {
+          localStorage.setItem('user', JSON.stringify(user));
+          navigate('/dashboard');
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const isDisabled = () => {
