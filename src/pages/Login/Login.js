@@ -7,17 +7,10 @@ function Login() {
     password: '',
   });
 
-  const handleInputUsername = (e) => {
+  const handleInput = (e) => {
     setPayloadLogin((prevState) => ({
       ...prevState,
-      username: e.target.value,
-    }));
-  };
-
-  const handleInputPassword = (e) => {
-    setPayloadLogin((prevState) => ({
-      ...prevState,
-      password: e.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -39,22 +32,24 @@ function Login() {
               <div className='input-group mt-3 mb-3'>
                 <input
                   type='text'
+                  name='username'
                   className='form-control'
                   placeholder='Username'
                   aria-label='Username'
                   aria-describedby='basic-addon1'
-                  onChange={handleInputUsername}
+                  onChange={handleInput}
                 />
               </div>
 
               <div className='input-group mb-5'>
                 <input
                   type='password'
+                  name='password'
                   className='form-control'
                   placeholder='Password'
                   aria-label='Password'
                   aria-describedby='basic-addon1'
-                  onChange={handleInputPassword}
+                  onChange={handleInput}
                 />
               </div>
 
