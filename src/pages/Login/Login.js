@@ -1,6 +1,34 @@
+import { useState } from 'react';
 import './login.scss';
 
 function Login() {
+  const [payloadLogin, setPayloadLogin] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleInputUsername = (e) => {
+    setPayloadLogin((prevState) => ({
+      ...prevState,
+      username: e.target.value,
+    }));
+  };
+
+  const handleInputPassword = (e) => {
+    setPayloadLogin((prevState) => ({
+      ...prevState,
+      password: e.target.value,
+    }));
+  };
+
+  const handleButtonSignIn = () => {
+    console.log(payloadLogin);
+  };
+
+  const isDisabled = () => {
+    return payloadLogin.username === '' || payloadLogin.password === '';
+  };
+
   return (
     <>
       <div className='container-fluid custom-container'>
@@ -8,27 +36,34 @@ function Login() {
           <div className='col d-flex justify-content-center align-items-center'>
             <div className='card login-card'>
               <h3 className='text-center'>Sign In</h3>
-              <div class='input-group mt-3 mb-3'>
+              <div className='input-group mt-3 mb-3'>
                 <input
                   type='text'
-                  class='form-control'
+                  className='form-control'
                   placeholder='Username'
                   aria-label='Username'
                   aria-describedby='basic-addon1'
+                  onChange={handleInputUsername}
                 />
               </div>
 
-              <div class='input-group mb-5'>
+              <div className='input-group mb-5'>
                 <input
                   type='password'
-                  class='form-control'
+                  className='form-control'
                   placeholder='Password'
                   aria-label='Password'
                   aria-describedby='basic-addon1'
+                  onChange={handleInputPassword}
                 />
               </div>
 
-              <button type='button' class='btn btn-primary'>
+              <button
+                type='button'
+                disabled={isDisabled()}
+                className='btn btn-primary'
+                onClick={handleButtonSignIn}
+              >
                 Sign In
               </button>
             </div>
