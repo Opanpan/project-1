@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+import PublicRoute from './PublicRoute';
 import ListPage from './ListPage';
 
 function AppRoute() {
@@ -22,7 +23,15 @@ function AppRoute() {
               />
             );
           }
-          return <Route path={el.path} key={i} element={el.component} />;
+          return (
+            <Route
+              path={el.path}
+              key={i}
+              element={
+                <PublicRoute isSignedIn={user}>{el.component}</PublicRoute>
+              }
+            />
+          );
         })}
       </Routes>
     </BrowserRouter>
