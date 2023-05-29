@@ -1,5 +1,11 @@
+import Navbar from '../components/Navbar';
+
 function Dashoard() {
-  return <h1>Dashboard</h1>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default Dashoard;

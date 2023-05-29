@@ -18,6 +18,12 @@ function Login() {
     }));
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleButtonSignIn();
+    }
+  };
+
   const handleButtonSignIn = () => {
     axios
       .post('http://127.0.0.1:8000/api/login', payloadLogin)
@@ -63,6 +69,7 @@ function Login() {
                   aria-label='Password'
                   aria-describedby='basic-addon1'
                   onChange={handleInput}
+                  onKeyDown={handleKeyDown}
                 />
               </div>
 
